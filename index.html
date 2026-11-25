@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hailmichael Meketa - Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .card {
+    display: flex;
+    width: 1000px;
+    max-width: 100%;
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+
+  /* ---------- LEFT SIDEBAR ---------- */
+  .sidebar {
+    width: 32%;
+    background: #e8545f;
+    color: #fff;
+    padding: 60px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 40px;
+    align-self: flex-start;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+  .avatar-wrap {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #fff;
+    border: 5px solid rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 40px;
+    flex-shrink: 0;
+  }
+  .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  
+  .nav { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+    text-align: center; 
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    opacity: 0.85;
+    transition: opacity .2s;
+    padding: 5px 0;
+  }
+  .nav a:hover { opacity: 1; }
+  .nav a.active { opacity: 1; font-weight: 700; }
+
+  /* ---------- RIGHT CONTENT ---------- */
+  .content { 
+    width: 68%; 
+    padding: 55px 50px; 
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  
+  /* Header Section */
+  .header-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 52px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #333;
+  }
+  .name .first { color: #333; }
+  .name .last { color: #9a9a9a; font-weight: 500; }
+  .name .accent { color: #e8545f; }
+  .contact {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #777;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+  .tagline {
+    margin-top: 25px;
+    font-size: 13.5px;
+    color: #888;
+    line-height: 1.6;
+  }
+  .socials { display: flex; gap: 14px; margin-top: 25px; }
+  .socials a {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #555;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background .2s;
+  }
+  .socials a:hover { background: #e8545f; }
+
+  /* ---------- LANGUAGES & TOOLS CARD (2x2) ---------- */
+  .tools-card {
+    margin-top: 25px;
+    max-width: 460px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .tools-header {
+    background: #e8545f;
+    color: #fff;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: #f5f5f5;
+  }
+  .tool-item {
+    padding: 22px 10px;
+    text-align: center;
+    border-right: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .tool-item:nth-child(2n) { border-right: none; }
+  .tool-item:nth-child(n+3) { border-bottom: none; }
+  .tool-item .icon {
+    color: #e8545f;
+    font-size: 24px;
+  }
+  .tool-item .label {
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  /* Generic Section Styles */
+  .content-section {
+    scroll-margin-top: 20px;
+  }
+  .content-section h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e8545f;
+    padding-bottom: 5px;
+    display: inline-block;
+  }
+  .content-section p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+
+  /* ---------- NEW: ATTRACTIVE SKILLS STYLING ---------- */
+  .skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .skill-box {
+    background: #f9f9f9;
+    border-left: 4px solid #e8545f;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    transition: all 0.2s ease;
+  }
+  .skill-box:hover {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transform: translateX(4px);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 780px) {
+    .card { flex-direction: column; }
+    .sidebar { 
+      width: 100%; 
+      position: relative; 
+      top: 0; 
+      height: auto; 
+      padding: 40px 20px;
+    }
+    .nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .content { padding: 35px 25px; }
+    .name { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="avatar-wrap">
+        <img src="photo.jpg" alt="Profile">
+      </div>
+      <nav class="nav">
+        <a href="#about" class="active">ABOUT</a>
+        <a href="#experience">EXPERIENCE</a>
+        <a href="#education">EDUCATION</a>
+        <a href="#skills">SKILLS</a>
+      </nav>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="content">
+      
+      <!-- HEADER & INTRO -->
+      <div class="header-section">
+        <h1 class="name">
+          <span class="first">Hailmichael Meketa</span>
+          <span class="accent"></span>
+        </h1>
+        <p class="contact">- Addis Abeba, Ethiopia &nbsp; • &nbsp; (+251) 933-53-90-06</p>
+        <p class="tagline">
+          Support Specialist. Front & Back End Web Developer. Problem Solver. Quick Learner. Dedicated to ensuring smooth system operations.
+        </p>
+
+        <div class="socials">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+
+        <!-- LANGUAGES & TOOLS (2x2 GRID) -->
+        <div class="tools-card">
+          <div class="tools-header">Languages &amp; Tools I Know</div>
+          <div class="tools-grid">
+            <div class="tool-item">
+              <div class="icon"><i class="fab fa-python"></i></div>
+              <div class="label">Python</div>
+            </div>
+            <div class="tool-item">
+              <div class="icon"><i class="fas fa-database"></i></div>
+              <div class="label">SQL</div>
+            </div>
+            <div class="tool-item">
+              <div class="icon"><i class="fab fa-html5"></i></div>
+              <div class="label">HTML / CSS</div>
+            </div>
+            <div class="tool-item">
+              <div class="icon"><i class="fab fa-js"></i></div>
+              <div class="label">JavaScript</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="content-section">
+        <h2>About Me</h2>
+        <p> Computer Science graduate with strong technical skills in system support, database management,and troubleshooting.</p>
+        <p>Quick learner with practical experience in web-based systems and user support.</p>
+      </section>
+
+      <!-- EXPERIENCE SECTION -->
+      <section id="experience" class="content-section">
+        <h2>Experience</h2>
+        <p><strong>Placeholder Job Title</strong> - Company Name (2020 - Present)</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <br>
+        <p><strong>Previous Job Title</strong> - Previous Company (2018 - 2020)</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </section>
+
+      <!-- EDUCATION SECTION -->
+      <section id="education" class="content-section">
+        <h2>Education</h2>
+        <p><strong>Bachelor of Science in Computer Science</strong> - Admas University, Addis Ababa (2013 - 2018)</p>
+        <p>Graduated: March 2026 </p>
+		<p>GPA: 3.74</p>
+        <p>Successfully passed the National Exit Examination. Exit Exam Result:74/100.</p>
+
+      </section>
+
+      <!-- SKILLS SECTION -->
+       <section id="skills" class="content-section">
+        <h2>Skills</h2>
+        <div class="skills-container">
+          <div class="skill-box">Database Management: MySQL and SQL queries.</div>
+          <div class="skill-box">Web Technologies: HTML, CSS, JavaScript, and PHP.</div>
+          <div class="skill-box">System Support &amp; Troubleshooting: Diagnosing and resolving hardware and software issues.</div>
+          <div class="skill-box">ERP Concepts &amp; Business Processes: Understanding of enterprise resource planning workflows.</div>
+          <div class="skill-box">User Training &amp; Technical Documentation: Creating clear guides and training end-users.</div>
+          <div class="skill-box">Ticketing Systems &amp; Remote Support: Proficient with helpdesk software and remote desktop tools.</div>
+          <div class="skill-box">Networking Basics: Knowledge of TCP/IP, DNS, and basic network troubleshooting.</div>
+          <div class="skill-box">Microsoft Office &amp; Windows OS: Advanced user and administrator experience.</div>
+          <div class="skill-box">Soft Skills: Strong problem-solving abilities and a proven capacity for quick learning.</div>
+        </div>
+      </section>
+      <!-- AWARDS SECTION REMOVED -->
+
+    </main>
+  </div>
+
+  <!-- JS to highlight active link on scroll -->
+  <script>
+    const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
